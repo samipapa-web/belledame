@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Marques — BELLE DAME COSMETIQUE</title>
+  <meta name="description" content="Navigation par marques — BELLE DAME COSMETIQUE">
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml"/>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <header class="header">
+    <div class="nav">
+      <a class="brand" href="index.html">
+        <img src="assets/logo.svg" alt="Logo"/>
+        <div>
+          <div class="name">BELLE DAME COSMETIQUE</div>
+          <span class="tag">Navigation par marques</span>
+        </div>
+      </a>
+      <div class="actions">
+        <a class="btn" href="index.html">Retour Boutique</a>
+        <button class="btn" id="cartBtn">Panier <span class="badge" id="cartBadge">0</span></button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="card hero-main">
+        <h1 class="h1">Marques</h1>
+        <p class="p">Sélectionnez une marque pour afficher ses produits dans la boutique.</p>
+      </div>
+    </section>
+
+    <section class="grid" id="brandsList" style="grid-template-columns: repeat(3, 1fr)"></section>
+
+    <footer class="footer">
+      <div>© <span id="year"></span> BELLE DAME COSMETIQUE</div>
+    </footer>
+  </main>
+
+  <!-- Cart Modal -->
+  <div class="modal-backdrop" id="cartModal">
+    <div class="modal">
+      <div class="modal-head">
+        <h2>Panier</h2>
+        <button class="btn" id="cartClose">Fermer</button>
+      </div>
+      <div class="cart">
+        <div class="panel" id="cartLines"></div>
+        <div class="card summary">
+          <div style="display:flex;justify-content:space-between;gap:10px">
+            <div class="small">Sous-total</div>
+            <div style="font-weight:950" id="subtotal">0 FCFA</div>
+          </div>
+          <div class="hr"></div>
+          <div style="display:flex;justify-content:space-between;gap:10px">
+            <div class="small">Total</div>
+            <div style="font-weight:950;font-size:18px" id="total">0 FCFA</div>
+          </div>
+          <div class="hr"></div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <button class="btn danger" id="clearCart">Vider</button>
+            <button class="btn primary" id="checkoutBtn">Commander via WhatsApp</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="app.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", ()=> {
+      const y = document.getElementById("year");
+      if(y) y.textContent = new Date().getFullYear();
+    });
+  </script>
+</body>
+</html>

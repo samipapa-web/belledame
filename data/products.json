@@ -1,0 +1,77 @@
+[
+  {
+    "id": "BD-0001",
+    "name": "Coco Mademoiselle",
+    "brand": "Chanel",
+    "price": 95000,
+    "currency": "FCFA",
+    "rubrique": "Parfums",
+    "sous_rubrique": "Parfum Femme",
+    "categorie": "Eau de Parfum",
+    "description": "Parfum femme iconique aux notes fraîches et ambrées.",
+    "images": [
+      "assets/p1.svg"
+    ],
+    "active": true
+  },
+  {
+    "id": "BD-0002",
+    "name": "Sauvage",
+    "brand": "Dior",
+    "price": 85000,
+    "currency": "FCFA",
+    "rubrique": "Parfums",
+    "sous_rubrique": "Parfum Homme",
+    "categorie": "Eau de Toilette",
+    "description": "Eau de toilette puissante et fraîche, inspirée des grands espaces.",
+    "images": [
+      "assets/p2.svg"
+    ],
+    "active": true
+  },
+  {
+    "id": "BD-0003",
+    "name": "Advanced Génifique",
+    "brand": "Lancôme",
+    "price": 72000,
+    "currency": "FCFA",
+    "rubrique": "Visage",
+    "sous_rubrique": "Soins par Type",
+    "categorie": "Sérum visage",
+    "description": "Sérum visage pour éclat et hydratation. Texture légère.",
+    "images": [
+      "assets/p3.svg"
+    ],
+    "active": true
+  },
+  {
+    "id": "BD-0004",
+    "name": "Rouge Pur Couture",
+    "brand": "Yves Saint Laurent",
+    "price": 32000,
+    "currency": "FCFA",
+    "rubrique": "Maquillage",
+    "sous_rubrique": "Lèvres",
+    "categorie": "Rouges à lèvres",
+    "description": "Rouge à lèvres intense, fini satiné, tenue confortable.",
+    "images": [
+      "assets/p4.svg"
+    ],
+    "active": true
+  },
+  {
+    "id": "BD-0005",
+    "name": "Shampooing Réparateur",
+    "brand": "Kérastase",
+    "price": 21000,
+    "currency": "FCFA",
+    "rubrique": "Cheveux",
+    "sous_rubrique": "Shampoings",
+    "categorie": "Abîmés & Cassants",
+    "description": "Shampoing réparateur pour cheveux fragilisés et cassants.",
+    "images": [
+      "assets/p5.svg"
+    ],
+    "active": true
+  }
+]

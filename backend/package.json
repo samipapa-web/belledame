@@ -1,0 +1,19 @@
+{
+  "name": "belle-dame-backend",
+  "version": "1.1.0",
+  "description": "Backend léger JSON (LowDB) pour catalogue partagé - BELLE DAME COSMETIQUE",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "morgan": "^1.10.0",
+    "lowdb": "^7.0.1",
+    "nanoid": "^5.0.7"
+  }
+}
+

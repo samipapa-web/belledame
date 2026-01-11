@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>BELLE DAME COSMETIQUE — Parfums & Cosmétiques</title>
+  <meta name="description" content="BELLE DAME COSMETIQUE — Vente de parfums et produits cosmétiques. Navigation par rubriques, catégories et marques.">
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml"/>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <header class="header">
+    <div class="nav">
+      <a class="brand" href="index.html">
+        <img src="assets/logo.svg" alt="Logo"/>
+        <div>
+          <div class="name">BELLE DAME COSMETIQUE</div>
+          <span class="tag">Parfums · Visage · Cheveux · Corps · Maquillage · Parapharmacie</span>
+        </div>
+      </a>
+
+      <div class="search" title="Rechercher un produit, une marque, une catégorie…">
+        <span style="opacity:.7">🔎</span>
+        <input id="q" placeholder="Rechercher : Chanel, Dior, sérum, eau de parfum…" autocomplete="off"/>
+      </div>
+
+      <div class="actions">
+        <a class="btn ghost" href="brands.html" title="Navigation par marques">Marques</a>
+        <button class="btn" id="adminBtn" title="Gestionnaire (ajout/modif produits)">Gestion</button>
+        <button class="btn" id="cartBtn" title="Panier">
+          Panier <span class="badge" id="cartBadge">0</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="pills" id="pills"></div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="card hero-main">
+          <h1 class="h1">BELLE DAME COSMETIQUE</h1>
+          <p class="p">Boutique beauté organisée : <b>Rubrique → Sous‑rubrique → Catégorie</b>, filtre par <b>marque</b>, panier, et commande via WhatsApp.</p>
+          <div class="kpis">
+            <div class="kpi"><b>Catalogue structuré</b><span>7 rubriques + sous‑rubriques + catégories</span></div>
+            <div class="kpi"><b>Navigation marques</b><span>page dédiée + filtre rapide</span></div>
+            <div class="kpi"><b>Gestion produits</b><span>édition rapide prix/image/description</span></div>
+          </div>
+        </div>
+        <div class="card hero-side">
+          <h3>Filtrer</h3>
+          <div style="display:grid;gap:10px">
+            <select class="select" id="rubriqueSel"></select>
+            <select class="select" id="sousSel"></select>
+            <select class="select" id="catSel"></select>
+            <select class="select" id="brandSel"></select>
+          </div>
+          <div class="hr"></div>
+          <div class="small">Résultat : <span id="count">0 produit(s)</span></div>
+          <div class="small" style="margin-top:10px">Astuce : cliquez sur une rubrique en haut pour filtrer en un clic.</div>
+        </div>
+      </div>
+    </section>
+
+    <div id="empty" class="notice" style="display:none;margin-top:14px">
+      Aucun produit ne correspond aux filtres actuels.
+    </div>
+
+    <section class="grid" id="grid"></section>
+
+    <section class="card" style="padding:18px">
+      <h3 style="margin:0 0 10px">Commande</h3>
+      <p class="p">Le bouton <b>Commander via WhatsApp</b> prépare automatiquement votre panier. Les détails de livraison et paiement sont confirmés par message.</p>
+      <div class="hr"></div>
+      <p class="small">WhatsApp officiel : <span id="shopPhone" data-phone="237670109792" style="font-weight:900">+237 670 109 792</span>.</p>
+    </section>
+
+    <footer class="footer">
+      <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap">
+        <div>© <span id="year"></span> BELLE DAME COSMETIQUE</div>
+        <div>Contact : WhatsApp · Livraison selon zone</div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Cart Modal -->
+  <div class="modal-backdrop" id="cartModal">
+    <div class="modal">
+      <div class="modal-head">
+        <h2>Panier</h2>
+        <button class="btn" id="cartClose">Fermer</button>
+      </div>
+      <div class="cart">
+        <div class="panel" id="cartLines"></div>
+        <div class="card summary">
+          <div style="display:flex;justify-content:space-between;gap:10px">
+            <div class="small">Sous-total</div>
+            <div style="font-weight:950" id="subtotal">0 FCFA</div>
+          </div>
+          <div class="hr"></div>
+          <div style="display:flex;justify-content:space-between;gap:10px">
+            <div class="small">Total</div>
+            <div style="font-weight:950;font-size:18px" id="total">0 FCFA</div>
+          </div>
+          <div class="hr"></div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <button class="btn danger" id="clearCart">Vider</button>
+            <button class="btn primary" id="checkoutBtn">Commander via WhatsApp</button>
+          </div>
+          <div class="small" style="margin-top:10px;color:var(--muted)">
+            La livraison et les frais éventuels seront confirmés par WhatsApp.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Details Modal -->
+  <div class="modal-backdrop" id="detailsModal">
+    <div class="modal">
+      <div class="modal-head">
+        <h2>Détails produit</h2>
+        <button class="btn" id="detailsCloseTop">Fermer</button>
+      </div>
+      <div id="detailsBody"></div>
+    </div>
+  </div>
+
+  <!-- PIN Modal -->
+  <div class="modal-backdrop" id="pinModal">
+    <div class="modal" style="max-width:560px;border-radius:22px">
+      <div class="modal-head">
+        <h2>Accès Gestion</h2>
+        <button class="btn" id="pinClose">Fermer</button>
+      </div>
+      <div class="card panel">
+        <div class="notice">Définissez un <b>PIN</b> (première fois), puis utilisez-le pour accéder à la gestion.</div>
+        <div class="hr"></div>
+        <input id="pinInput" class="input" placeholder="PIN (4 chiffres ou plus)" type="password"/>
+        <div style="display:flex;gap:10px;margin-top:12px">
+          <button class="btn primary" id="pinSave">Valider</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Modal -->
+  <div class="modal-backdrop" id="adminModal">
+    <div class="modal">
+      <div class="modal-head">
+        <h2>Gestion des produits</h2>
+        <button class="btn" id="adminClose">Fermer</button>
+      </div>
+
+      <div class="card panel">
+        <div class="grid2">
+          <div>
+            <h3 style="margin:0 0 10px">Créer / modifier un produit</h3>
+
+            <div class="notice" id="lockNote" style="display:none;margin-bottom:10px">
+              <b>Édition rapide :</b> pour un produit existant, vous modifiez par défaut <b>prix</b>, <b>image</b> et <b>description</b>.
+              Cochez “Déverrouiller” si vous devez modifier aussi le nom, la marque ou la catégorisation.
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;margin:0 0 12px">
+              <input id="unlockToggle" type="checkbox">
+              <label for="unlockToggle" class="small">Déverrouiller les champs avancés</label>
+            </div>
+
+            <div class="grid2">
+              <div><label class="small">ID (optionnel)</label><input id="pId" class="input" placeholder="BD-0006"></div>
+              <div><label class="small">Marque *</label><input id="pBrand" class="input" placeholder="Chanel, Dior, Lancôme…"></div>
+            </div>
+            <div style="margin-top:10px"><label class="small">Intitulé *</label><input id="pName" class="input" placeholder="Nom du produit"></div>
+
+            <div class="grid2" style="margin-top:10px">
+              <div><label class="small">Prix (FCFA) *</label><input id="pPrice" class="input" type="number" placeholder="Ex : 25000"></div>
+              <div>
+                <label class="small">Image via lien (URL) ou DataURL</label>
+                <input id="pImg" class="input" placeholder="https://.../image.jpg (ou laisser vide)">
+              </div>
+            </div>
+
+            <div class="grid2" style="margin-top:10px">
+              <div>
+                <label class="small">Charger une image depuis le disque</label>
+                <input id="pFile" class="input" type="file" accept="image/*">
+                <div class="small" style="margin-top:6px">Le fichier est converti en image intégrée (DataURL) pour fonctionner sur un site statique.</div>
+              </div>
+              <div>
+                <label class="small">Aperçu</label>
+                <img id="imgPreview" alt="Aperçu" style="width:100%;height:140px;object-fit:cover;border:1px solid var(--border);border-radius:12px;background:#fff" />
+              </div>
+            </div>
+
+            <div class="grid2" style="margin-top:10px">
+              <div>
+                <label class="small">Rubrique *</label>
+                <select id="pRub" class="select">
+                  <option value="">Rubrique</option>
+                </select>
+              </div>
+              <div>
+                <label class="small">Sous‑rubrique *</label>
+                <select id="pSous" class="select">
+                  <option value="">Sous-rubrique</option>
+                </select>
+              </div>
+            </div>
+            <div style="margin-top:10px">
+              <label class="small">Catégorie *</label>
+              <select id="pCat" class="select">
+                <option value="">Catégorie</option>
+              </select>
+            </div>
+
+            <div style="margin-top:10px">
+              <label class="small">Description</label>
+              <textarea id="pDesc" class="input" placeholder="Description du produit"></textarea>
+            </div>
+
+            <div style="display:flex;align-items:center;gap:10px;margin-top:10px">
+              <input id="pActive" type="checkbox" checked>
+              <label for="pActive" class="small">Produit actif (visible)</label>
+            </div>
+
+            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
+              <button class="btn" id="newProduct">Nouveau</button>
+              <button class="btn primary" id="saveProduct">Enregistrer</button>
+              <button class="btn" id="exportJSON">Exporter JSON</button>
+              <label class="btn" style="cursor:pointer">
+                Importer JSON
+                <input id="importJSON" type="file" accept="application/json" style="display:none">
+              </label>
+            </div>
+
+            <div class="hr"></div>
+            <h3 style="margin:0 0 10px">WhatsApp Boutique</h3>
+            <div class="small">Format international sans “+” (ex : 2376XXXXXXXX)</div>
+            <div style="display:flex;gap:10px;margin-top:8px">
+              <input id="phoneInput" class="input" placeholder="237670109792">
+              <button class="btn primary" id="savePhone">Enregistrer</button>
+            </div>
+          </div>
+
+          <div>
+            <h3 style="margin:0 0 10px">Produits</h3>
+            <div class="small">Cliquez sur <b>Modifier</b> : par défaut, vous ne changez que prix/image/description.</div>
+            <div style="overflow:auto;max-height:520px;margin-top:10px">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Produit</th>
+                    <th>Prix</th>
+                    <th>Catégorisation</th>
+                    <th>Actif</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="adminTbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="notice" style="margin-top:12px">
+        <b>Note :</b> les produits (et images importées) sont stockés dans votre navigateur. Pour un vrai catalogue partagé (multi‑appareils), il faudra connecter une base de données.
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // Remplir les rubriques dans le select Admin
+    document.addEventListener("DOMContentLoaded", async ()=>{
+      try{
+        const r = await fetch("data/taxonomy.json",{cache:"no-store"});
+        const tax = await r.json();
+        const pRub = document.getElementById("pRub");
+        Object.keys(tax).forEach(k=>{
+          const o = document.createElement("option");
+          o.value = k; o.textContent = k;
+          pRub.appendChild(o);
+        });
+      }catch(e){}
+    });
+  </script>
+
+  <script src="app.js"></script>
+</body>
+</html>

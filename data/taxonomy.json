@@ -1,0 +1,202 @@
+{
+  "Parfums": {
+    "Parfum Femme": [
+      "Eau de Parfum",
+      "Eau de Toilette",
+      "Eau de Cologne",
+      "Déodorant Parfumé",
+      "Soin & Lait Parfumé"
+    ],
+    "Parfum Homme": [
+      "Eau de Parfum",
+      "Eau de Toilette",
+      "Eau de Cologne",
+      "Déodorant Parfumé",
+      "Soin & Lait Parfumé"
+    ],
+    "Parfum Mixte": [
+      "Eau de Parfum",
+      "Eau de Toilette",
+      "Eau de Cologne",
+      "Déodorant Parfumé",
+      "Soin & Lait Parfumé"
+    ],
+    "Coffrets Parfum": [
+      "Coffrets Femme",
+      "Coffrets Homme",
+      "Coffrets Mixte",
+      "Coffrets Aromatiques / Thématiques"
+    ]
+  },
+  "Visage": {
+    "Soins par Type": [
+      "Sérum visage",
+      "Crème de Jour",
+      "Crème de Nuit",
+      "Contour des Yeux",
+      "Soin des Lèvres",
+      "Huile de Visage",
+      "Gommage & Peeling",
+      "Soin Cils & Sourcils"
+    ],
+    "Besoins Spécifiques": [
+      "Anti-âge & Anti-ride",
+      "Hydratant & Nourrissant",
+      "Liftant & Raffermissant",
+      "Matifiant",
+      "Anti-tâche / Anti-rougeur",
+      "Anti-imperfections",
+      "Éclat & Anti-fatigue",
+      "Exfoliant"
+    ],
+    "Démaquillant & Nettoyant": [
+      "Mousse / Lait / Gel",
+      "Lotion Tonique",
+      "Eau Micellaire"
+    ],
+    "Masques": [
+      "Hydratants",
+      "Purifiants",
+      "Spécifiques (yeux, cou & décolleté, nuit)"
+    ],
+    "Solaire Visage": [
+      "Protection UV",
+      "Auto-bronzant",
+      "Après-soleil"
+    ],
+    "Soin Visage Homme": [
+      "Hydratant & Anti-fatigue",
+      "Anti-ride",
+      "Nettoyant / Rasage"
+    ]
+  },
+  "Cheveux": {
+    "Shampoings": [
+      "Cheveux Normaux",
+      "Colorés",
+      "Secs & Sensibilisés",
+      "Abîmés & Cassants",
+      "Indisciplinés",
+      "Fins",
+      "Bouclés & Frisés",
+      "Spécifiques (blonds/gris/blancs, pellicules, cuir chevelu sensible)",
+      "Homme",
+      "Solide / Enfant"
+    ],
+    "Soins Capillaires": [
+      "Masques",
+      "Soins sans rinçage",
+      "Huile & Sérum",
+      "Traitements / Cures",
+      "Repigmentants",
+      "Exfoliants pour cuir chevelu"
+    ],
+    "Colorations": [
+      "Coloration d’oxydation",
+      "Ton sur Ton",
+      "Temporaire",
+      "Révélateur / Oxydant",
+      "Accessoires & post-coloration"
+    ],
+    "Après-Shampoings": [
+      "Par type de cheveux (normal, coloré, sec, fin, etc.)"
+    ],
+    "Produits Coiffants": [
+      "Cire",
+      "Gel",
+      "Laque / Mousse",
+      "Crèmes & Sérums",
+      "Spray Brillance",
+      "Protection Thermique",
+      "Pâte de coiffage / Shampoing sec"
+    ],
+    "Accessoires & Matériel": [
+      "Sèche-cheveux",
+      "Fer à lisser / boucler",
+      "Tondeuse",
+      "Brosses et peignes"
+    ]
+  },
+  "Corps & Bain": {
+    "Soins du Corps": [
+      "Hydratant & Nourrissant",
+      "Liftant / Raffermissant",
+      "Anti-vergetures & Cellulite",
+      "Soin Buste & Décolleté",
+      "Gommages & Peelings",
+      "Soins pour mains & pieds",
+      "Huiles nourrissantes"
+    ],
+    "Bain & Douche": [
+      "Gel Douche",
+      "Savon solide",
+      "Huile de bain"
+    ],
+    "Déodorants & Hygiène": [
+      "Déodorants",
+      "Produits de rasage / Barbe"
+    ],
+    "Solaire Corps": [
+      "Protection",
+      "Auto-bronzant",
+      "Après-soleil"
+    ],
+    "Corps Homme": [
+      "Gel douche & savon",
+      "Hydratants",
+      "Déodorants / Barbe"
+    ]
+  },
+  "Maquillage": {
+    "Yeux": [
+      "Mascara",
+      "Palette",
+      "Fard à paupières",
+      "Eyeliner",
+      "Crayon & Khôl",
+      "Produits sourcils"
+    ],
+    "Teint": [
+      "Fond de teint",
+      "BB/CC crème",
+      "Anti-cernes & correcteur",
+      "Base & fixateur",
+      "Poudre / bronzer",
+      "Blush",
+      "Contouring / Highlighter"
+    ],
+    "Lèvres": [
+      "Rouges à lèvres",
+      "Gloss",
+      "Crayons",
+      "Baumes"
+    ],
+    "Ongles": [
+      "Vernis",
+      "Soins ongles"
+    ],
+    "Accessoires & Coffrets Maquillage": []
+  },
+  "Parapharmacie (Soins complémentaires)": {
+    "Soins Visage": [
+      "Crèmes Jour / Nuit",
+      "Anti-rides",
+      "Anti-imperfections",
+      "Contour des yeux"
+    ],
+    "Corps & Hygiène": [
+      "Hydratants",
+      "Peelings",
+      "Déodorants",
+      "Rasage"
+    ],
+    "Produits de Bain & Nettoyants": []
+  },
+  "Coffrets & Offres Spéciales": {
+    "Coffrets Parfum": [],
+    "Coffrets Soin Visage": [],
+    "Coffrets Cheveux": [],
+    "Coffrets Maquillage": [],
+    "Pack Promo / Petit Prix": []
+  }
+}
