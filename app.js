@@ -34,6 +34,14 @@ async function apiAdmin(path, method, body, pin){
   return await r.json();
 }
 
+// PIN admin: priorité à un champ (si présent), sinon au PIN mémorisé
+function getAdminPin(){
+  const fromInput = (document.getElementById('adminPin')?.value||'').trim();
+  if(fromInput) return fromInput;
+  const fromStore = (store?.getAdmin?.().pin||'').trim();
+  return fromStore;
+}
+
 const store = {
 
   keyProducts: "bdc_products_v3",
@@ -582,7 +590,7 @@ function refreshAdminTable(){
     
 // sync backend (optional): soft delete
 try{
-  const pin=(document.getElementById('adminPin')?.value||'').trim();
+  const pin = getAdminPin();
   if(pin){ apiAdmin(`/api/admin/products/${id}`,'DELETE', null, pin).catch(()=>{}); }
 }catch(e){}
       refreshAdminTable();
@@ -611,12 +619,14 @@ function initAdmin(){
       if(!admin.pin){
         if(pin.length < 4){ ui.toast("PIN trop court (min 4)"); return; }
         store.saveAdmin({pin});
+        const ap=document.getElementById('adminPin'); if(ap) ap.value = pin;
         ui.closeModal("pinModal");
         ui.toast("PIN défini");
         openAdmin();
       } else {
         if(pin !== admin.pin){ ui.toast("PIN incorrect"); return; }
         ui.closeModal("pinModal");
+        const ap=document.getElementById('adminPin'); if(ap) ap.value = pin;
         openAdmin();
       }
     };
@@ -680,7 +690,7 @@ function initAdmin(){
     store.saveProducts(PRODUCTS);
     // sync backend (optional)
     try{
-      const pin=(document.getElementById('adminPin')?.value||'').trim();
+      const pin = getAdminPin();
       if(pin){ await apiAdmin('/api/admin/products','POST', p, pin); }
     }catch(e){}
     refreshAdminTable();
@@ -716,7 +726,7 @@ function initAdmin(){
       store.saveProducts(PRODUCTS);
     // sync backend (optional): seed all products
 try{
-  const pin=(document.getElementById('adminPin')?.value||'').trim();
+  const pin = getAdminPin();
   if(pin){ await apiAdmin('/api/admin/seed','POST',{ products: PRODUCTS }, pin); }
 }catch(e){}
 ui.toast("Import réussi");
@@ -748,7 +758,15 @@ if(pushBtn) pushBtn.addEventListener("click", ()=>adminPushToDb().catch(()=>ui.t
 
 async function main(){
   TAX = await store.getTaxonomy();
-  try{ PRODUCTS = await apiGet("/api/products"); }
+  // Chargement catalogue : backend en priorité, mais si la base est vide on conserve le local (évite d'écraser le catalogue)
+  try{
+    const remote = await apiGet("/api/products");
+    if(Array.isArray(remote) && remote.length > 0){
+      PRODUCTS = remote;
+    } else {
+      PRODUCTS = await store.getProducts();
+    }
+  }
   catch(e){ PRODUCTS = await store.getProducts(); }
   buildPills(TAX);
   bindPills();
@@ -781,13 +799,17 @@ document.addEventListener("DOMContentLoaded", main);
 
 
 async function adminLoadFromDb(){
-  // reading public products doesn't need pin
-const data = await apiGet("/api/products");
-PRODUCTS = data;
-store.saveProducts(PRODUCTS);
-ui.toast("Catalogue chargé depuis la base");
-render();
-if(typeof refreshAdminTable === "function") refreshAdminTable();
+  // Lecture publique : pas besoin de PIN
+  const data = await apiGet("/api/products");
+  if(Array.isArray(data) && data.length > 0){
+    PRODUCTS = data;
+    store.saveProducts(PRODUCTS);
+    ui.toast("Catalogue chargé depuis la base");
+    render();
+    if(typeof refreshAdminTable === "function") refreshAdminTable();
+  } else {
+    ui.toast("Base vide : catalogue local conservé");
+  }
 }
 
 async function adminPushToDb(){
