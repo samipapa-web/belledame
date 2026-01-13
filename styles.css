@@ -41,7 +41,7 @@ a{color:inherit;text-decoration:none}
 .brand img.brand-banner{
   width:150%;
   height:79px;
-  object-fit:contain;
+  object-fit:cover;
   display:block;
 }
 @media(max-width:930px){
