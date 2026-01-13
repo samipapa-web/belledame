@@ -36,6 +36,17 @@ a{color:inherit;text-decoration:none}
 .brand img{width:34px;height:34px}
 .brand .name{font-weight:900;letter-spacing:.3px}
 .brand .tag{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+
+/* Header banner (replaces logo+text at left of the search bar) */
+.brand img.brand-banner{
+  width:110%;
+  height:65px;
+  object-fit:cover;
+  display:block;
+}
+@media(max-width:930px){
+  .brand img.brand-banner{height:44px;}
+}
 .search{
   flex:1;max-width:520px;display:flex;align-items:center;gap:10px;
   padding:10px 12px;border-radius:999px;border:1px solid var(--border);
