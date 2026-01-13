@@ -39,8 +39,8 @@ a{color:inherit;text-decoration:none}
 
 /* Header banner (replaces logo+text at left of the search bar) */
 .brand img.brand-banner{
-  width:100%;
-  height:56px;
+  width:120%;
+  height:62px;
   object-fit:contain;
   display:block;
 }
