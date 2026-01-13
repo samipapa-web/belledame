@@ -21,8 +21,6 @@
       </div>
 
       <div class="actions">
-        <a class="btn ghost" href="brands.html" title="Navigation par marques">Marques</a>
-        <button class="btn" id="adminBtn" title="Gestionnaire (ajout/modif produits)">Gestion</button>
         <button class="btn" id="cartBtn" title="Panier">
           Panier <span class="badge" id="cartBadge">0</span>
         </button>
@@ -66,16 +64,18 @@
     <section class="grid" id="grid"></section>
 
     <section class="card" style="padding:18px">
-      <h3 style="margin:0 0 10px">Commande</h3>
-      <p class="p">Le bouton <b>Commander via WhatsApp</b> prépare automatiquement votre panier. Les détails de livraison et paiement sont confirmés par message.</p>
+      <h3 style="margin:0 0 10px">Paiement et livraison</h3>
+      <p class="p">Le bouton <b>Ajouter au panier</b> prépare automatiquement votre panier. Les détails de livraison et de paiement sont confirmés par WhatsApp immédiatement apres votre commande.</p>
       <div class="hr"></div>
       <p class="small">WhatsApp officiel : <span id="shopPhone" data-phone="237670109792" style="font-weight:900">+237 670 109 792</span>.</p>
     </section>
 
     <footer class="footer">
       <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap">
-        <div>© <span id="year"></span> BELLE DAME COSMETIQUE</div>
-        <div>Contact : WhatsApp · Livraison selon zone</div>
+        <div>© 2020 BELLE DAME COSMETIQUE</div>		
+		<div class="actions">
+			<button class="btn" id="adminBtn" title="Gestionnaire (ajout/modif produits)">Gestion</button>
+        </div>
       </div>
     </footer>
   </main>
@@ -131,7 +131,7 @@
         <button class="btn" id="pinClose">Fermer</button>
       </div>
       <div class="card panel">
-        <div class="notice">Définissez un <b>PIN</b> (première fois), puis utilisez-le pour accéder à la gestion.</div>
+        <div class="notice">Code <b>PIN</b> </div>
         <div class="hr"></div>
         <input id="pinInput" class="input" placeholder="PIN (4 chiffres ou plus)" type="password"/>
         <div style="display:flex;gap:10px;margin-top:12px">
