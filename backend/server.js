@@ -14,18 +14,54 @@ const __dirname = path.dirname(__filename);
 const PORT = process.env.PORT ? Number(process.env.PORT) : 8080;
 const ADMIN_PIN = process.env.ADMIN_PIN || "1234";
 
+// Render persistent disk mount (recommended). If not on Render, keep local backend/data.
+const RENDER_DATA_DIR = "/opt/render/project/src/backend/data";
+
 function ensureDir(p) { fs.mkdirSync(p, { recursive: true }); }
 
-const dataDir = path.join(__dirname, "data");
+// Choose data dir: Render persistent disk if available, otherwise local backend/data
+const dataDir = (process.env.RENDER || fs.existsSync(RENDER_DATA_DIR)) ? RENDER_DATA_DIR : path.join(__dirname, "data");
 ensureDir(dataDir);
 
 const dbFile = path.join(dataDir, "db.json");
 const adapter = new JSONFile(dbFile);
 const db = new Low(adapter, { products: [] });
 
+// Seed file (commit this into the repo)
+const seedFile = path.join(__dirname, "seed", "products.json");
+
+function readSeedProducts() {
+  if (!fs.existsSync(seedFile)) return [];
+  try {
+    const raw = fs.readFileSync(seedFile, "utf-8");
+    const parsed = JSON.parse(raw);
+    if (Array.isArray(parsed)) return parsed;
+    if (parsed && Array.isArray(parsed.products)) return parsed.products;
+    return [];
+  } catch (e) {
+    console.error("Seed file exists but could not be parsed as JSON:", e?.message || e);
+    return [];
+  }
+}
+
 async function initDb() {
   await db.read();
   db.data ||= { products: [] };
+
+  const current = Array.isArray(db.data.products) ? db.data.products : [];
+  const hasProducts = current.length > 0;
+
+  // If DB is empty (or file doesn't exist yet), initialize from seed/products.json if present.
+  if (!hasProducts) {
+    const seedProducts = readSeedProducts();
+    if (seedProducts.length > 0) {
+      db.data.products = seedProducts.map(normalizeProduct);
+      await db.write();
+      console.log(`Seed applied: ${db.data.products.length} products loaded from ${seedFile}`);
+      return;
+    }
+  }
+
   await db.write();
 }
 
@@ -60,11 +96,18 @@ function normalizeProduct(p) {
 
 app.get("/api/health", (req, res) => res.json({ ok: true }));
 
+// Prevent caching of API responses (helps multi-device freshness)
+app.use("/api", (req, res, next) => {
+  res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate");
+  res.setHeader("Pragma", "no-cache");
+  res.setHeader("Expires", "0");
+  next();
+});
+
 // Public products (active only)
 app.get("/api/products", async (req, res) => {
   await db.read();
   const list = (db.data.products || []).filter(p => p.active !== false);
-  // tri simple
   list.sort((a, b) =>
     (a.rubrique || "").localeCompare(b.rubrique || "") ||
     (a.brand || "").localeCompare(b.brand || "") ||
@@ -79,7 +122,7 @@ app.get("/api/admin/products", requireAdmin, async (req, res) => {
   res.json(db.data.products || []);
 });
 
-// Admin: seed (replace/update from array)
+// Admin: seed (merge/update from array)
 app.post("/api/admin/seed", requireAdmin, async (req, res) => {
   const products = req.body?.products;
   if (!Array.isArray(products)) return res.status(400).json({ error: "Provide {products:[...]}" });
