@@ -31,32 +31,14 @@
   </header>
 
   <main class="container">
-    <section class="hero" style="padding:0">
-      <div style="
-        display:flex;
-        gap:16px;
-        align-items:stretch;
-        justify-content:space-between;
-        flex-wrap:wrap;
-      ">
-        <picture style="flex:2;width:100%;display:block">
-          <source srcset="banderole.webp" type="image/webp">
-          <img
-            src="banderole.png"
-            alt="Banderole BELLE DAME COSMETIQUE"
-            style="width:100%;max-height:420px;object-fit:contain;display:block"
-          />
-        </picture>
-
-        <picture style="flex:1;width:100%;display:block">
-          <source srcset="boutique.webp" type="image/webp">
-          <img
-            src="boutique.png"
-            alt="Boutique BELLE DAME COSMETIQUE"
-            style="width:100%;max-height:420px;object-fit:contain;display:block"
-          />
-        </picture>
-      </div>
+    <section class="hero hero-main-image">
+      <img
+        src="banderole_boutique.jpg"
+        alt="BELLE DAME COSMETIQUE — Parfums & produits cosmétiques"
+        class="hero-img-main"
+        loading="eager"
+        fetchpriority="high"
+      />
     </section>
 
     <div id="empty" class="notice" style="display:none;margin-top:14px">

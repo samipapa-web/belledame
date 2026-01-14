@@ -80,6 +80,32 @@ a{color:inherit;text-decoration:none}
 .pill.active{border-color: rgba(236,72,153,.55); box-shadow: 0 0 0 3px rgba(236,72,153,.12) inset}
 .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow)}
 .hero{padding:26px 0 8px}
+
+
+/* === HERO MAIN IMAGE (banderole_boutique.jpg) === */
+.hero.hero-main-image{
+  padding: 0;
+  margin: 0;
+}
+.hero-img-main{
+  width: 100%;
+  height: auto;
+  max-height: 520px; /* desktop */
+  object-fit: cover;
+  display: block;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: #fff;
+}
+
+/* Mobile */
+@media (max-width: 768px){
+  .hero-img-main{
+    max-height: 320px;
+    object-fit: cover;
+  }
+}
+
 .hero-grid{display:grid;grid-template-columns: 1.2fr .8fr;gap:14px}
 @media(max-width:930px){.hero-grid{grid-template-columns:1fr}.search{display:none}.brand{min-width:auto}}
 .hero-main{padding:22px}
