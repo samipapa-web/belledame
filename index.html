@@ -40,6 +40,22 @@
       />
     </section>
 
+    <section class="hero-filters">
+      <div class="card hero-side hero-filter-behind">
+          <h3>Filtrer</h3>
+          <div style="display:grid;gap:10px">
+            <select class="select" id="rubriqueSel"></select>
+            <select class="select" id="sousSel"></select>
+            <select class="select" id="catSel"></select>
+            <select class="select" id="brandSel"></select>
+          </div>
+          <div class="hr"></div>
+          <div class="small">Résultat : <span id="count">0 produit(s)</span></div>
+          <div class="small" style="margin-top:10px">Astuce : cliquez sur une rubrique en haut pour filtrer en un clic.</div>
+        </div>
+    </section>
+
+
     <div id="empty" class="notice" style="display:none;margin-top:14px">
       Aucun produit ne correspond aux filtres actuels.
     </div>

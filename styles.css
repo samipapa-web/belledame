@@ -197,3 +197,29 @@ textarea{min-height:110px;resize:vertical}
     height:260px;        /* SAME HEIGHT MOBILE */
   }
 }
+
+/* === HIDE FILTER BEHIND HERO IMAGE (KEEP DOM FOR JS) === */
+.hero {
+  position: relative;
+}
+
+/* Ensure hero images are above */
+.hero-images,
+.hero img,
+.hero picture {
+  position: relative;
+  z-index: 2;
+}
+
+/* Filter kept but hidden behind */
+.hero-filter-behind {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  opacity: 0;
+  pointer-events: none;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
