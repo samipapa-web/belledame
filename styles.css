@@ -138,3 +138,36 @@ textarea{min-height:110px;resize:vertical}
 
 /* admin modal scroll (v3.1) */
 .modal{max-height:calc(100vh - 40px);overflow:auto;}
+
+
+
+/* === HERO IMAGES : SAME HEIGHT (DESKTOP + MOBILE) === */
+.hero-images{
+  display:flex;
+  gap:16px;
+  align-items:stretch;
+}
+
+.hero-images picture{
+  display:block;
+}
+
+.hero-images picture:first-child{flex:2;}
+.hero-images picture:last-child{flex:1;}
+
+.hero-images img{
+  width:100%;
+  height:420px;          /* SAME HEIGHT DESKTOP */
+  object-fit:contain;   /* no distortion */
+  display:block;
+}
+
+/* MOBILE */
+@media (max-width:768px){
+  .hero-images{
+    flex-direction:column;
+  }
+  .hero-images img{
+    height:260px;        /* SAME HEIGHT MOBILE */
+  }
+}
